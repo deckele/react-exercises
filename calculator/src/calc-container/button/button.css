@@ -1,0 +1,17 @@
+.calc-button {
+    border-radius: 20%;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    flex: 20%;
+    border: none;
+    outline: none;
+    margin: 1%;
+    box-shadow: -1px 1px 15px 0px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.calc-button:active {
+    box-shadow: 1px -1px 15px 0px rgba(0,0,0,0.5);
+    background: #c5c5c5;
+}

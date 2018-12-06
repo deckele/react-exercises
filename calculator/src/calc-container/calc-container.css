@@ -1,0 +1,9 @@
+.calc-container {
+    border-radius: 4px;
+    padding: 15px 5px;
+    background: grey;
+    width: 160px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: -2px 3px 15px 0px rgba(0,0,0,0.5);
+}
