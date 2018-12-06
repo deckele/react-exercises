@@ -21,12 +21,12 @@ export class CalcContainer extends React.Component<CalcContainerProps, CalcConta
         try {
             return String(eval(this.state.result));
         } catch(e) {
-            return "ERR: SYNTAX ERROR!!!";
+            return "ERR: SYNTAX!!!";
         }
     }
 
-    handleButtonClicked = (newInput: string) => {
-        switch (newInput) {
+    handleButtonClicked = (input: string) => {
+        switch (input) {
             case "=":
                 this.setState({
                     result: this.evalCalcResult()
@@ -37,7 +37,7 @@ export class CalcContainer extends React.Component<CalcContainerProps, CalcConta
                 break;
             default:
                 this.setState({
-                    result: this.state.result.concat(newInput)
+                    result: this.state.result.concat(input)
                 });
         }
     }

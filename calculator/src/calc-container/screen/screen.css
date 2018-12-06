@@ -1,12 +1,15 @@
 .calc-screen {
+    text-shadow: 0 -40px 100px, 0 0 2px;
     border-radius: 4px;
     margin-bottom: 4px;
     border: 1px solid black;
     width: 100%;
     height: 30px;
+    line-height: 30px;
     background: rgb(72, 199, 72);
     color: white;
-    display: flex;
-    align-items: center;
     padding: 0 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
