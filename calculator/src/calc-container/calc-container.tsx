@@ -24,6 +24,15 @@ export class CalcContainer extends React.Component<CalcContainerProps, CalcConta
             return "ERR: SYNTAX!!!";
         }
     }
+    componentDidMount() {
+        console.log("CalcContainer didMount!!!");
+    }
+    componentWillUnmount() {
+        console.log("Calculator willUnmount!!!");
+    }
+    componentDidUpdate() {
+        console.log("Calculator didUpdated!");
+    }
 
     handleButtonClicked = (input: string) => {
         switch (input) {
