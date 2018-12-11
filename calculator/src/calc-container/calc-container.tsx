@@ -24,13 +24,13 @@ export class CalcContainer extends React.Component<CalcContainerProps, CalcConta
             return "ERR: SYNTAX!!!";
         }
     }
-    componentDidMount() {
+    async componentDidMount() {
         console.log("CalcContainer didMount!!!");
     }
-    componentWillUnmount() {
+    async componentWillUnmount() {
         console.log("Calculator willUnmount!!!");
     }
-    componentDidUpdate() {
+    async componentDidUpdate() {
         console.log("Calculator didUpdated!");
     }
 

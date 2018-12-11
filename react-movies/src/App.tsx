@@ -1,6 +1,9 @@
 import * as React from 'react';
 import './App.css';
 import { RequestStatus, Movie, MovieResponseDTO } from './contracts';
+import { Header } from './header/header';
+import { NavList } from './nav-list/nav-list';
+import { MoviesList } from './movies-list/movies-list';
 
 interface AppState {
     movieList: any[];
@@ -60,7 +63,11 @@ class App extends React.Component<{}, AppState> {
     public render() {
         return (
             <div className="app">
-                React Movies!
+                <Header>
+                    React Movies!!
+                </Header>
+                <NavList />
+                <MoviesList movies={this.state.movieList} />
             </div>
         );
     }
