@@ -16,7 +16,6 @@ export const CalcContainer: FC = () => {
         try {
             return String(eval(result));
         } catch(e) {
-            setResetNextClick(true);
             return "ERR: SYNTAX!!!";
         }
     }
@@ -24,6 +23,7 @@ export const CalcContainer: FC = () => {
     function handleButtonClicked(input: string): void {
         switch (input) {
             case "=":
+                setResetNextClick(true);
                 setResult(evalCalcResult());
                 break;
             case "C":
