@@ -1,9 +1,9 @@
-import * as React from "react";
+import React, { FC } from "react";
 import "./screen.css";
 
 interface ScreenProps {
     result: string;
 }
-export const Screen: React.FC<ScreenProps> = (props) => (
-    <div className="calc-screen">{props.result}</div>
+export const Screen: FC<ScreenProps> = ({ result }) => (
+    <div className="calc-screen">{result}</div>
 );

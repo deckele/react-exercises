@@ -1,73 +1,60 @@
-import * as React from "react";
+import React, { FC, useState } from "react";
 import "./calc-container.css";
 import { Screen } from "./screen/screen";
 import { Button } from './button/button';
 import { buttonsConfig } from './calc-constants';
 
-interface CalcContainerProps {
+export const CalcContainer: FC = () => {
+    
+    const [ result, setResult ] = useState("");
+    const [ resetNextClick, setResetNextClick ] = useState(false);
 
-}
-interface CalcContainerState {
-    result: string;
-}
-
-export class CalcContainer extends React.Component<CalcContainerProps, CalcContainerState> {
-    constructor(props: CalcContainerProps) {
-        super(props);
-        this.state = { result: "" }
-    }
-
-    private evalCalcResult = (): string => {
+    function evalCalcResult(): string {
+        if (!result) {
+            return result;
+        } 
         try {
-            return String(eval(this.state.result));
+            return String(eval(result));
         } catch(e) {
+            setResetNextClick(true);
             return "ERR: SYNTAX!!!";
         }
     }
-    async componentDidMount() {
-        console.log("CalcContainer didMount!!!");
-    }
-    async componentWillUnmount() {
-        console.log("Calculator willUnmount!!!");
-    }
-    async componentDidUpdate() {
-        console.log("Calculator didUpdated!");
-    }
 
-    handleButtonClicked = (input: string) => {
+    function handleButtonClicked(input: string): void {
         switch (input) {
             case "=":
-                this.setState({
-                    result: this.evalCalcResult()
-                });
+                setResult(evalCalcResult());
                 break;
             case "C":
-                this.setState({ result: "" })
+                setResetNextClick(false);
+                setResult("")
                 break;
             default:
-                this.setState({
-                    result: this.state.result.concat(input)
-                });
+                if (resetNextClick) {
+                    setResetNextClick(false);
+                    setResult(input);
+                } else {
+                    setResult(result + input);
+                }
         }
     }
 
-    renderButtons = (): JSX.Element[] => {
+    function renderButtons(): JSX.Element[] {
         const buttons = buttonsConfig.map((buttonConf) => (
             <Button 
                 label={buttonConf} 
-                onClick={() => this.handleButtonClicked(buttonConf)}
+                onClick={() => handleButtonClicked(buttonConf)}
                 key={buttonConf}
             />)
         );
         return buttons;
     }
 
-    render() {
-        return (
-            <div className="calc-container">
-                <Screen result={this.state.result} />
-                {this.renderButtons()}
-            </div>
-        );
-    }
+    return (
+        <div className="calc-container">
+            <Screen result={result} />
+            {renderButtons()}
+        </div>
+    );
 }
