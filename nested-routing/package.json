@@ -9,6 +9,7 @@
     "@types/react-dom": "16.8.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "typescript": "3.3.4000"
   },
@@ -26,5 +27,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/react-router-dom": "^4.3.1"
+  }
 }

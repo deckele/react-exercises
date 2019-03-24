@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import { BrowserRouter } from "react-router-dom";
+import { topics } from "./constants/data";
 
-class App extends Component {
-  render() {
+export const App: React.FC = () => {
     return (
       <div className="App">
-        Dynamic Routing!
+        <BrowserRouter>
+          Dynamic Routing!
+        </BrowserRouter>
       </div>
     );
-  }
 }
-
-export default App;
