@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "react-movies"
+		},
+		{
+			"path": "nested-routing"
 		}
 	],
 	"settings": {}
