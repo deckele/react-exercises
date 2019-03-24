@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "nested-routing"
+		},
+		{
+			"path": "forms"
 		}
 	],
 	"settings": {}
