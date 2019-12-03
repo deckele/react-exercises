@@ -1,11 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useCallback, memo } from "react";
 import "./button.css";
 interface ButtonProps {
     label: string;
-    onClick: () => void;
+    onClick: (label: string) => void;
 }
-export const Button: FC<ButtonProps> = ({ onClick, label }) => (
-    <button onClick={onClick} className="calc-button">
-        {label}
-    </button>
-);
+export const Button: FC<ButtonProps> = memo(({ onClick, label }) => {
+    const handleClick = useCallback(() => onClick(label), [onClick, label]);
+    return (
+        <button onClick={handleClick} className="calc-button">
+            {label}
+        </button>
+    );
+})
