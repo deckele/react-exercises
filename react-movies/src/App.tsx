@@ -1,51 +1,42 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { RequestStatus, Movie, MovieResponseDTO } from './contracts';
 import { Header } from './header/header';
-import { NavList } from './nav-list/nav-list';
 import { MoviesList } from './movies-list/movies-list';
 
-interface AppState {
-    movieList: any[];
-    getMoviesStatus: RequestStatus;
-}
+const App: React.FC = () => {
+    const [ movieList, setMovieList ] = useState([] as Movie[]);
+    const [ , setGetMoviesStatus ] = useState("idle" as RequestStatus);
 
-class App extends React.Component<{}, AppState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = { 
-            movieList: [],
-            getMoviesStatus: "idle"
-        };
+    useEffect(() => {
+        getMoviesAsync();
+    }, []);
+
+    function getMoviesSucceeded(movies: Movie[]) {
+        setMovieList(movies);
+        setGetMoviesStatus("idle");
     }
 
-    private getMoviesSucceeded = (movies: Movie[]) => {
-        this.setState({
-            getMoviesStatus: "idle",
-            movieList: movies
-        });
-    }
-
-    private getMoviesFailed = (e: any) => {
+    function getMoviesFailed(e: any) {
         console.error(e);
-        this.setState({getMoviesStatus: "error"});
+        setGetMoviesStatus("error");
     }
 
-    private getMoviesAsync = async () => {
-        this.setState({getMoviesStatus: "loading"});
+    async function getMoviesAsync() {
+        setGetMoviesStatus("loading");
         try {
             const response = await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=6723a43a0d554a924752c10b71b5b401&language=en-US&page=1");
             const moviesResponse: MovieResponseDTO = await response.json();
             console.log("result: " + JSON.stringify(moviesResponse));
-            this.getMoviesSucceeded(
-                this.extractMovieInfoFromDTO(moviesResponse)
+            getMoviesSucceeded(
+                extractMovieInfoFromDTO(moviesResponse)
             );
         } catch (e) {
-            this.getMoviesFailed(e)
+            getMoviesFailed(e)
         }
     }
 
-    private extractMovieInfoFromDTO (moviesResponse: MovieResponseDTO): Movie[] {
+    function extractMovieInfoFromDTO (moviesResponse: MovieResponseDTO): Movie[] {
         const moviesDTO = moviesResponse.results;
         return moviesDTO.map(dto => ({
             id: dto.id,
@@ -56,21 +47,14 @@ class App extends React.Component<{}, AppState> {
         } as Movie));
     }
 
-    componentDidMount() {
-        this.getMoviesAsync();
-    }
-
-    public render() {
-        return (
-            <div className="app">
-                <Header>
-                    React Movies!!
-                </Header>
-                <NavList />
-                <MoviesList movies={this.state.movieList} />
-            </div>
-        );
-    }
+    return (
+        <div className="app">
+            <Header>
+                React Movies!!
+            </Header>
+            <MoviesList movies={movieList} />
+        </div>
+    );
 }
 
 export default App;

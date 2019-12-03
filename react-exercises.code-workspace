@@ -5,6 +5,15 @@
 		},
 		{
 			"path": "react-movies"
+		},
+		{
+			"path": "nested-routing"
+		},
+		{
+			"path": "forms"
+		},
+		{
+			"path": "calculator-redux"
 		}
 	],
 	"settings": {}
